@@ -1,4 +1,4 @@
-FROM blacklabelops/centos
+FROM centos
 MAINTAINER Paysavvy <mikem@paysavvy.com>
 
 # install dev tools
