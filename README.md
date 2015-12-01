@@ -3,3 +3,4 @@ docker run -d \
   --name paysavvy_loggly \
   paysavvy/fluentd_loggly
 
+https://github.com/ryotarai/fluent-plugin-cloudwatch-logs

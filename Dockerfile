@@ -12,17 +12,19 @@ RUN yum install -y \
     gem && \
     yum clean all && rm -rf /var/cache/yum/*
 
-# install fluentd
+# install fluentd and plugins
 RUN gem install fluentd --no-ri --no-rdoc && \
-    gem install fluent-plugin-loggly:0.0.6 --no-ri --no-rdoc && \
     gem install fluent-plugin-burrow --no-ri --no-rdoc && \
+    gem install fluent-plugin-cloudwatch-logs --no-ri --no-rdoc && \
     fluentd --setup /etc/fluent && \
     mkdir /opt/fluentd
 
+EXPOSE 24224
+    
 WORKDIR /etc/fluent
 
-#only configurable with filtered.prefix
-ENV LOGGLY_MATCH="filtered.containerlog.**"
 ENV LOG_FILE_FORMAT=json
+
+RUN mkdir -p /var/log/fluent/myapp
 
 CMD ["fluentd"]
